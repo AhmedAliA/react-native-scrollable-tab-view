@@ -68,11 +68,11 @@ const ScrollableTabBar = createReactClass({
     if (tabCount === 0 || offset.value < 0 || offset.value > lastTabPosition) {
       return;
     }
-
-    if (this.necessarilyMeasurementsCompleted(position, position === lastTabPosition)) {
-      this.updateTabPanel(position, pageOffset);
-      this.updateTabUnderline(position, pageOffset, tabCount);
-    }
+  
+    // if (this.necessarilyMeasurementsCompleted(position, position === lastTabPosition)) {
+    //   this.updateTabPanel(position, pageOffset);
+    //   this.updateTabUnderline(position, pageOffset, tabCount);
+    // }
   },
 
   necessarilyMeasurementsCompleted(position, isLastTab) {
@@ -87,7 +87,7 @@ const ScrollableTabBar = createReactClass({
     const tabWidth = this._tabsMeasurements[position].width;
     const nextTabMeasurements = this._tabsMeasurements[position + 1];
     const nextTabWidth = nextTabMeasurements && nextTabMeasurements.width || 0;
-    const tabOffset = this._tabsMeasurements[position].left;
+    const tabOffset = this._tabsMeasurements[position];
     const absolutePageOffset = pageOffset * tabWidth;
     let newScrollX = tabOffset + absolutePageOffset;
 
@@ -204,6 +204,7 @@ const ScrollableTabBar = createReactClass({
     if (JSON.stringify(prevProps.tabs) !== JSON.stringify(this.props.tabs) && this.state._containerWidth) {
       this.setState({ _containerWidth: null, });
     }
+
   },
 
   onTabContainerLayout(e) {
